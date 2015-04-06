@@ -17,7 +17,8 @@ var paths = {
         scripts : ['scripts/js/**/*.js'],
         less    : 'css/_all.less',
         images  : ['images/*.jpg', 'images/*.png', 'images/*.gif', 'images/*.jpeg'],
-        fonts   : ['fonts/*.eot', 'fonts/*.svg', 'fonts/*.ttf', 'fonts/*.woff', 'fonts/*.woff2']
+        fonts   : ['fonts/*.eot', 'fonts/*.svg', 'fonts/*.ttf', 'fonts/*.woff', 'fonts/*.woff2'],
+        index   : 'index.html'
     },
 
     /*
@@ -27,7 +28,8 @@ var paths = {
         scripts : '../public/scripts/js/lib',
         less    : '../public/css',
         images  : '../public/images',
-        fonts   : '../public/fonts'
+        fonts   : '../public/fonts',
+        index   : '../public'
     };
 
 /*
@@ -62,6 +64,16 @@ gulp.task('images', function() {
 });
 
 /*
+Index for public dir
+ */
+
+gulp.task('copyindex', function () {
+    return gulp.src(paths.index)
+        .pipe(newer(dest.index))
+        .pipe(gulp.dest(dest.index))
+});
+
+/*
 Build scripts
  */
 
@@ -75,13 +87,13 @@ gulp.task('scripts', function() {
 Watcher runs the task again if changed
  */
 
-/*gulp.task('watch', function() {
-
-});*/
+gulp.task('watch', function() {
+    gulp.watch('css/custom.less', ['compileless']);
+});
 
 
 /*
 Gulp Task
  */
-gulp.task('default', ['compileless', 'fonts', 'images', 'scripts']);
+gulp.task('default', ['watch', 'compileless', 'fonts', 'images', 'scripts', 'copyindex']);
 
