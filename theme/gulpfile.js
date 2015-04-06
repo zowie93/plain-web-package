@@ -17,7 +17,7 @@ var paths = {
         scripts : ['scripts/js/**/*.js'],
         less    : 'css/_all.less',
         images  : ['images/*.jpg', 'images/*.png', 'images/*.gif', 'images/*.jpeg'],
-        fonts   : ['fonts/*.eot', 'fonts/*.svg', 'fonts/*.ttf', 'fonts/*.woff']
+        fonts   : ['fonts/*.eot', 'fonts/*.svg', 'fonts/*.ttf', 'fonts/*.woff', 'fonts/*.woff2']
     },
 
     /*
