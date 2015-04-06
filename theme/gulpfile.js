@@ -14,6 +14,7 @@ Main Paths
  */
 
 var paths = {
+        main    : 'scripts/app/*.js',
         scripts : ['scripts/js/**/*.js'],
         less    : 'css/_all.less',
         images  : ['images/*.jpg', 'images/*.png', 'images/*.gif', 'images/*.jpeg'],
@@ -25,6 +26,7 @@ var paths = {
     Destination
      */
     dest = {
+        main    : '../public/scripts/js/app',
         scripts : '../public/scripts/js/lib',
         less    : '../public/css',
         images  : '../public/images',
@@ -84,16 +86,27 @@ gulp.task('scripts', function() {
 });
 
 /*
+Build App scripts
+ */
+
+gulp.task('appscripts', function () {
+   return gulp.src(paths.main)
+       .pipe(uglify())
+       .pipe(gulp.dest(dest.main))
+});
+
+/*
 Watcher runs the task again if changed
  */
 
 gulp.task('watch', function() {
     gulp.watch('css/custom.less', ['compileless']);
+    gulp.watch(paths.main, ['appscripts']);
 });
 
 
 /*
 Gulp Task
  */
-gulp.task('default', ['watch', 'compileless', 'fonts', 'images', 'scripts', 'copyindex']);
+gulp.task('default', ['watch', 'compileless', 'fonts', 'images', 'scripts', 'appscripts', 'copyindex']);
 
